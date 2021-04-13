@@ -1,0 +1,11 @@
+.walletButton {
+  background-color: var(--blue-dark);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 0.5rem 1.5rem;
+}
+
+.walletButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

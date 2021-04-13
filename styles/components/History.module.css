@@ -1,0 +1,27 @@
+.historyContainer {
+  width: 25%;
+  margin: 2rem 3rem 0rem 2rem;
+  border-radius: 5px;
+  padding: 2rem 1.5rem;
+  background-color: var(--blue-dark);
+  color: var(--blue-dark);
+}
+
+.historyContainer h2 {
+  text-align: center;
+}
+
+.historyContainer div {
+  background-color: var(--background);
+  max-height: 80vh;
+  width: 100%;
+  height: 80vh;
+  border-radius: 5px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.historyContainer p {
+  margin: 0.75rem 2rem;
+}

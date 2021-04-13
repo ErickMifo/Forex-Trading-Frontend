@@ -1,0 +1,78 @@
+.walletContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 60vw;
+  height: 70vh;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 1;
+  animation: walletAnimation 0.125s linear;
+}
+
+@keyframes walletAnimation {
+  from {
+    width: 0vw;
+    height: 0vh;
+  }
+  to {
+    width: 60vw;
+    height: 70vh;
+  }
+}
+
+.walletContainer h3 {
+  margin-top: 1rem;
+}
+
+.walletContainer div {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 2rem;
+}
+
+.walletContainer div h2 {
+  margin-top: 3rem;
+}
+
+.exitButton {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(4px);
+  color: var(--blue-dark);
+  top: 0.25rem;
+  right: 1rem;
+  font-size: 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form button {
+  margin-top: 2rem;
+}
+
+.form input {
+  background: transparent;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  font-size: 1.25rem;
+}
+
+.form input::placeholder {
+  color: black;
+}
+
+.form select {
+  margin-top: 6rem;
+}

@@ -1,0 +1,21 @@
+.inputComponent {
+  color: var(--blue-dark);
+  border: none;
+  border-bottom: 2px solid var(--blue);
+  outline: none;
+  align-self: center;
+  transition: 0.2s ease all;
+  padding: 0.25rem;
+}
+
+.inputComponent:hover {
+  border-bottom: 2px solid #a0a0a0;
+}
+
+.inputComponent:focus {
+  border-bottom: 2px solid var(--blue);
+}
+
+.inputComponent::placeholder {
+  font-size: 1rem;
+}
