@@ -31,7 +31,6 @@ function Graph() {
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.once('connect', () => {
-      console.log('connected');
     });
     socket.on('graph', (arg) => {
       setDate(Object.keys(arg.EUR_GBP));
@@ -41,31 +40,34 @@ function Graph() {
   }, [ENDPOINT]);
 
   // when either USDvalue, GBPvalue or date change, update the database.
-  if (GBPvalue && USDvalue !== []) {
-    useEffect(() => {
+  useEffect(() => {
+    if (GBPvalue.length && USDvalue.length && date.length !== 0) {
       instance.put('graph/1', {
         graph_date: date[0],
         usd: USDvalue[0],
         gbp: GBPvalue[0],
+        graph_id: 1,
       });
       instance.put('graph/2', {
         graph_date: date[1],
         usd: USDvalue[1],
         gbp: GBPvalue[1],
+        graph_id: 2,
       });
       instance.put('graph/3', {
         graph_date: date[2],
         usd: USDvalue[2],
         gbp: GBPvalue[2],
+        graph_id: 3,
       });
       instance.put('graph/4', {
         graph_date: date[3],
         usd: USDvalue[3],
         gbp: GBPvalue[3],
+        graph_id: 4,
       });
-      console.log(date);
-    }, [USDvalue, date, GBPvalue]);
-  }
+    }
+  }, [USDvalue, date, GBPvalue]);
 
   // using the right format for recharts library.
   const data = [

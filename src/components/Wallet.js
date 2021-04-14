@@ -5,25 +5,36 @@ import WalltetButton from './Buttons/WalletButton';
 import Input from './Input';
 
 /* eslint-disable react/prop-types */
-function Wallet({ onClick }) {
+function Wallet({
+  onClick, toDeposit, confirm, select, wallet,
+}) {
   const [inputValue, setInputValue] = useState('');
+  const [selected, setSelected] = useState('');
 
   const {
     walletGBP,
     walletUSD,
     setWalletGBP,
+    setWalletUSD,
   } = useTransaction();
 
   const handleChange = (e) => { setInputValue(e.target.value); };
   const handleClick = () => {
-    setWalletGBP(parseFloat(walletGBP) + parseFloat(inputValue));
-    console.log(walletGBP);
+    if (selected === 'GBP') {
+      setWalletGBP(parseFloat(walletGBP) + parseFloat(inputValue));
+    } else if (selected === 'USD') {
+      setWalletUSD(parseFloat(walletUSD) + parseFloat(inputValue));
+    }
   };
 
   return (
     <div className={styles.walletContainer}>
       <button className={styles.exitButton} type="button" onClick={onClick}>x</button>
-      <h3> My Wallet </h3>
+      <h3>
+        {' '}
+        {wallet}
+        {' '}
+      </h3>
       <div>
         <h2>
           {' '}
@@ -39,17 +50,22 @@ function Wallet({ onClick }) {
         </h2>
       </div>
       <div className={styles.form}>
-        <select>
-          <option value="">Select a currency</option>
+        <select
+          className={styles.select}
+          onChange={(e) => {
+            setSelected(e.target.value);
+          }}
+        >
+          <option value="">{select}</option>
           <option value="GBP">GBP</option>
           <option value="USD">USD</option>
         </select>
-        <Input placeholder="amount to deposit" type="number" value={inputValue} onChange={handleChange} />
+        <Input placeholder={toDeposit} type="number" value={inputValue} onChange={handleChange} />
         <WalltetButton
-          disabled={!!(inputValue === '' || inputValue <= 0)}
+          disabled={(!!(inputValue === '' || inputValue <= 0) || selected === '')}
           onClick={handleClick}
         >
-          Confirm
+          {confirm}
         </WalltetButton>
       </div>
     </div>
