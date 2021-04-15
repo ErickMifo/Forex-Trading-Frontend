@@ -1,34 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Module-1-WestPoint-Frontend
 
-## Getting Started
+A frontend for a Forex Trading Application made with Nextjs and a couple of dependencies such as:
 
-First, run the development server:
+1. Axios to fetch data from my api;
+2. Recharts to create a graph to show the variations of the currencies;
+3. Socket-io-client to update data in real time;
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+The project contains 2 main components. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A Table of past trades and a dashboard to perform mock trades.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+![WestPoint Module 2 - Google Chrome 14_04_2021 14_11_36 (2)](https://user-images.githubusercontent.com/65738815/114751589-b7ef4d00-9d2b-11eb-8802-df5caf1ce32f.png)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Theres also a Wallet to check and deposit GBP or USD
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+![WestPoint Module 2 - Google Chrome 14_04_2021 14_17_23 (2)](https://user-images.githubusercontent.com/65738815/114751993-38ae4900-9d2c-11eb-9a8c-7c7bb9c94bc8.png)
 
-## Learn More
+And a Queue system in the Mock trading
 
-To learn more about Next.js, take a look at the following resources:
+![WestPoint Module 2 - Google Chrome 14_04_2021 14_20_03 (2)](https://user-images.githubusercontent.com/65738815/114752356-92af0e80-9d2c-11eb-80b4-9a8643051961.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+The project has support for i18n pt-br and en-us and most of the function have a self-explanatory name, but i'll quickly go through some of them.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Every useEffect is used to either fetch, update or post data. 
+To fetch data its used a function called "getData" and it uses axios to fetch from my database. In some cases socket is used to get it in real time instead.
+To post or update data its just used a "instance.post" or "instance.put" and passed where and what to post/update.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Theres some elements that are just visible if some button are clicked. To make it happen I used "useState" and to manage if the element will be visible or not is just a matter if the useState is set to "true" or "false".
+
+A folder on the project called "context" is used to manage the state of the application. Since the application is built through components this "useContext" hook is needed to make them interact with each other.
+
+Finally to install this project, you can just git clone and yarn add.
+
+Project made for WestPoint's "Module 2".
+
+Made by Erick Mifo ( https://github.com/ErickMifo ).
+
