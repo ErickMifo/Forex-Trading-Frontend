@@ -6,6 +6,7 @@ import TransactionProvider from '../src/context/transactionContext';
 import History from '../src/components/History';
 import DashBoard from '../src/components/DashBoard';
 import { ptBR, enUS } from '../i18n';
+import Queue from '../src/components/Queue';
 
 export default function Home() {
   const router = useRouter();
@@ -20,7 +21,6 @@ export default function Home() {
       <div className={styles.App}>
         <History past={translation.past} />
         <DashBoard
-          to={translation.to}
           base={translation.base}
           wallet={translation.wallet}
           buy={translation.buy}
@@ -29,6 +29,7 @@ export default function Home() {
           select={translation.select}
           confirm={translation.confirm}
         />
+        <Queue done={translation.done} processing={translation.processing} />
       </div>
     </TransactionProvider>
   );

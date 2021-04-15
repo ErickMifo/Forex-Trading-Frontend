@@ -18,7 +18,7 @@ function Graph() {
   useEffect(() => {
     async function getData() {
       const request = await instance.get('graph');
-      setDate(request.data.map((item) => item.graph_date));
+      setDate(request.data.map((item) => item.graph_date).sort());
       setUSDValue(request.data.map((item) => item.usd));
       setGBPValue(request.data.map((item) => item.gbp));
     }

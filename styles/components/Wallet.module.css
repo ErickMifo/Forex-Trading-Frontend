@@ -13,31 +13,34 @@
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   z-index: 1;
-  animation: walletAnimation 0.125s linear;
 }
 
-@keyframes walletAnimation {
-  from {
-    width: 0vw;
-    height: 0vh;
-  }
-  to {
-    width: 60vw;
-    height: 70vh;
-  }
+.moreOpacity {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 55vw;
+  height: 60vh;
+  background: var(--background);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 1;
 }
 
-.walletContainer h3 {
+.moreOpacity h3 {
   margin-top: 1rem;
 }
 
-.walletContainer div {
+.moreOpacity div {
   display: flex;
   justify-content: space-around;
   margin-left: 2rem;
 }
 
-.walletContainer div h2 {
+.moreOpacity div h2 {
   margin-top: 3rem;
 }
 
@@ -60,6 +63,7 @@
 
 .form button {
   margin-top: 2rem;
+  border-radius: 4px;
 }
 
 .form input {
@@ -85,7 +89,4 @@
 
 .select:hover {
   border-bottom: 2px solid var(--blue-dark);
-}
-
-.select option {
 }

@@ -1,6 +1,8 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
+import { v4 as uuid } from 'uuid';
 import styles from '../../styles/components/DashBoard.module.css';
 import instance from '../axios/axios';
 import { useTransaction } from '../context/transactionContext';
@@ -13,7 +15,7 @@ import Wallet from './Wallet';
 let socket;
 
 function DashBoard({
-  to, wallet, buy, toBuy, toDeposit, select, confirm,
+  wallet, buy, toBuy, toDeposit, select, confirm,
 }) {
   const {
     history,
@@ -22,6 +24,8 @@ function DashBoard({
     walletUSD,
     setWalletGBP,
     setWalletUSD,
+    QueueArray,
+    setQueueArray,
   } = useTransaction();
 
   const [isWalletOpen, setIsWalletOpen] = useState(false);
@@ -91,22 +95,47 @@ function DashBoard({
   const handleChange2 = (e) => { setInputValue2(e.target.value); };
   const handleChange1 = (e) => { setInputValue1(e.target.value); };
 
-  const handleClick1 = () => {
-    setWalletGBP(parseFloat(walletGBP) + parseFloat(inputValue1));
-    setWalletUSD(parseFloat(walletUSD) - Math.round(roundUSD * inputValue1 * 1000) / 1000);
-    setHistory([...history, `${inputValue1} GBP --> ${Math.round(roundUSD * inputValue1 * 1000) / 1000} USD`]);
-    instance.post('history', {
-      history_content: `${inputValue1} GBP --> ${Math.round(roundUSD * inputValue1 * 1000) / 1000} USD`,
-    });
+  const time = 3000;
+
+  const id = uuid();
+  const Queueref = useRef();
+  const historyref = useRef();
+  const walletGBPref = useRef();
+  const walletUSDref = useRef();
+  Queueref.current = QueueArray;
+  historyref.current = history;
+  walletUSDref.current = walletUSD;
+  walletGBPref.current = walletGBP;
+
+  const buyUSD = () => {
+    setQueueArray([...QueueArray, { value: 1, id }]);
+
+    setTimeout(() => {
+      setWalletGBP(parseFloat(walletGBPref.current) - Math.round(roundUSD * inputValue1 * 1000) / 1000);
+      setWalletUSD(parseFloat(walletUSDref.current) + parseFloat(inputValue1));
+      setHistory([`${Math.round(roundUSD * inputValue1 * 1000) / 1000} GBP → ${inputValue1} USD`, ...historyref.current]);
+      instance.post('history', {
+        history_content: `${Math.round(roundUSD * inputValue1 * 1000) / 1000} GBP → ${inputValue1} USD`,
+      });
+      setQueueArray(Queueref.current.filter((item) => item.id !== id));
+    }, time);
   };
 
-  const handleClick2 = () => {
-    setWalletUSD(parseFloat(walletUSD) + parseFloat(inputValue2));
-    setWalletGBP(parseFloat(walletGBP) - Math.round(roundGBP * inputValue2 * 1000) / 1000);
-    setHistory([...history, `${inputValue2} USD --> ${Math.round(roundGBP * inputValue2 * 1000) / 1000} GBP`]);
-    instance.post('history', {
-      history_content: `${inputValue2} USD --> ${Math.round(roundGBP * inputValue2 * 1000) / 1000} GBP`,
-    });
+  const buyGBP = () => {
+    setQueueArray([...QueueArray, { value: 1, id }]);
+
+    setTimeout(() => {
+      setQueueArray(Queueref.current.filter((item) => item.id !== id));
+    }, time);
+
+    setTimeout(() => {
+      setWalletUSD(parseFloat(walletUSDref.current) - Math.round(roundGBP * inputValue2 * 1000) / 1000);
+      setWalletGBP(parseFloat(walletGBPref.current) + parseFloat(inputValue2));
+      setHistory([`${Math.round(roundGBP * inputValue2 * 1000) / 1000} USD → ${inputValue2} GBP`, ...historyref.current]);
+      instance.post('history', {
+        history_content: `${Math.round(roundGBP * inputValue2 * 1000) / 1000} USD → ${inputValue2} GBP`,
+      });
+    }, time);
   };
 
   return (
@@ -119,7 +148,9 @@ function DashBoard({
           {wallet}
           {' '}
         </WalltetButton>
-        <h3> Base EUR </h3>
+        <h3>
+          Base EUR
+        </h3>
         {isWalletOpen ? (
           <Wallet
             confirm={confirm}
@@ -137,15 +168,11 @@ function DashBoard({
       <div className={styles.buyContainer}>
 
         <div>
-          GBP
-          {' '}
-          {to}
-          {' '}
           USD
           <Input placeholder={toBuy} type="number" value={inputValue1} onChange={handleChange1} />
           <BuyButton
             disabled={!!(inputValue1 === '' || inputValue1 <= 0)}
-            onClick={handleClick1}
+            onClick={buyUSD}
             bgColor="var(--blue)"
           >
             {buy}
@@ -153,21 +180,19 @@ function DashBoard({
               {inputValue1 === '' || inputValue1 <= 0
                 ? roundUSD
                 : Math.round(roundUSD * inputValue1 * 1000) / 1000}
+              {' '}
+              GBP
             </p>
           </BuyButton>
 
         </div>
 
         <div>
-          USD
-          {' '}
-          {to}
-          {' '}
           GBP
           <Input placeholder={toBuy} type="number" value={inputValue2} onChange={handleChange2} />
           <BuyButton
             disabled={!!(inputValue2 === '' || inputValue2 <= 0)}
-            onClick={handleClick2}
+            onClick={buyGBP}
             bgColor="var(--blue)"
           >
             {buy}
@@ -175,6 +200,8 @@ function DashBoard({
               {inputValue2 === '' || inputValue2 <= 0
                 ? roundGBP
                 : Math.round(roundGBP * inputValue2 * 1000) / 1000}
+              {' '}
+              USD
             </p>
           </BuyButton>
 

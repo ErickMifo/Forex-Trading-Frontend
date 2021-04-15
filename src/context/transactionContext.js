@@ -8,6 +8,7 @@ export default function Provider({ children }) {
   const [dbHistory, setDbHistory] = useState([]);
   const [walletGBP, setWalletGBP] = useState(0);
   const [walletUSD, setWalletUSD] = useState(0);
+  const [QueueArray, setQueueArray] = useState([]);
 
   return (
     <TransactionContext.Provider value={{
@@ -19,6 +20,8 @@ export default function Provider({ children }) {
       setWalletGBP,
       walletUSD,
       setWalletUSD,
+      QueueArray,
+      setQueueArray,
     }}
     >
       {children}
@@ -38,6 +41,8 @@ export function useTransaction() {
     setWalletGBP,
     walletUSD,
     setWalletUSD,
+    QueueArray,
+    setQueueArray,
   } = context;
   return {
     history,
@@ -48,5 +53,7 @@ export function useTransaction() {
     setWalletGBP,
     walletUSD,
     setWalletUSD,
+    QueueArray,
+    setQueueArray,
   };
 }
