@@ -14,11 +14,11 @@ A Table of past trades and a dashboard to perform mock trades.
 
 Theres also a Wallet to check and deposit GBP or USD
 
-![WestPoint Module 2 - Google Chrome 14_04_2021 14_17_23 (2)](https://user-images.githubusercontent.com/65738815/114751993-38ae4900-9d2c-11eb-9a8c-7c7bb9c94bc8.png)
+![WestPoint Module 2 - Google Chrome 19_04_2021 11_56_40 (2)](https://user-images.githubusercontent.com/65738815/115257483-8220de80-a106-11eb-986c-4c6ddf78dc38.png)
 
 And a Queue system in the Mock trading
 
-![WestPoint Module 2 - Google Chrome 14_04_2021 14_20_03 (2)](https://user-images.githubusercontent.com/65738815/114752356-92af0e80-9d2c-11eb-80b4-9a8643051961.png)
+![WestPoint Module 2 - Google Chrome 19_04_2021 11_49_44 (2)](https://user-images.githubusercontent.com/65738815/115256499-a7611d00-a105-11eb-8dbc-837faebe56b2.png)
 
 
 
