@@ -34,6 +34,8 @@ A folder on the project called "context" is used to manage the state of the appl
 
 Finally to install this project, you can just git clone and yarn.
 
+Link to the backend - https://github.com/ErickMifo/module-2-WestPoint-backend
+
 Project made for WestPoint's "Module 2".
 
 Made by Erick Mifo ( https://github.com/ErickMifo ).
