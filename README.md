@@ -32,7 +32,7 @@ Theres some elements that are just visible if some button are clicked. To make i
 
 A folder on the project called "context" is used to manage the state of the application. Since the application is built through components this "useContext" hook is needed to make them interact with each other.
 
-Finally to install this project, you can just git clone and yarn add.
+Finally to install this project, you can just git clone and yarn.
 
 Project made for WestPoint's "Module 2".
 
