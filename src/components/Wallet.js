@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import styles from '../../styles/components/Wallet.module.css';
-import { useTransaction } from '../context/transactionContext';
-import WalltetButton from './Buttons/WalletButton';
-import Input from './Input';
+import styles from '../../styles/components/wallet.module.css';
+import { useTransaction } from '../context/transactioncontext';
+import WalltetButton from './buttons/walletbutton';
+import Input from './input';
 
 /* eslint-disable react/prop-types */
 function Wallet({

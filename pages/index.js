@@ -1,12 +1,12 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import TransactionProvider from '../src/context/transactionContext';
-import History from '../src/components/History';
-import DashBoard from '../src/components/DashBoard';
+import styles from '../styles/home.module.css';
+import TransactionProvider from '../src/context/transactioncontext';
+import History from '../src/components/history';
+import DashBoard from '../src/components/dashboard';
 import { ptBR, enUS } from '../i18n';
-import Queue from '../src/components/Queue';
+import Queue from '../src/components/queue';
 
 export default function Home() {
   const router = useRouter();

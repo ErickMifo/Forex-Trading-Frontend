@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../styles/components/Input.module.css';
+import styles from '../../styles/components/input.module.css';
 
 function Input({
   // eslint-disable-next-line react/prop-types

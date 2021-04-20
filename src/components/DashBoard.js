@@ -3,19 +3,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import { v4 as uuid } from 'uuid';
-import styles from '../../styles/components/DashBoard.module.css';
+import styles from '../../styles/components/dashboard.module.css';
 import instance from '../axios/axios';
-import { useTransaction } from '../context/transactionContext';
-import Input from './Input';
-import Graph from './Graph';
-import BuyButton from './Buttons/BuyButton';
-import WalltetButton from './Buttons/WalletButton';
-import Wallet from './Wallet';
+import { useTransaction } from '../context/transactioncontext';
+import Input from './input';
+import Graph from './graph';
+import BuyButton from './buttons/buybutton';
+import WalltetButton from './buttons/walletbutton';
+import Wallet from './wallet';
 
 let socket;
 
 function DashBoard({
-  wallet, buy, toBuy, toDeposit, select, confirm,
+  wallet, toBuy, toDeposit, select, confirm, buy,
 }) {
   const {
     history,
@@ -174,15 +174,11 @@ function DashBoard({
             disabled={!!(inputValue1 === '' || inputValue1 <= 0)}
             onClick={buyUSD}
             bgColor="var(--blue)"
+            inputValue={inputValue1}
+            round={roundUSD}
+            currency="GBP"
           >
             {buy}
-            <p>
-              {inputValue1 === '' || inputValue1 <= 0
-                ? roundUSD
-                : Math.round(roundUSD * inputValue1 * 1000) / 1000}
-              {' '}
-              GBP
-            </p>
           </BuyButton>
 
         </div>
@@ -194,15 +190,11 @@ function DashBoard({
             disabled={!!(inputValue2 === '' || inputValue2 <= 0)}
             onClick={buyGBP}
             bgColor="var(--blue)"
+            inputValue={inputValue2}
+            round={roundGBP}
+            currency="USD"
           >
             {buy}
-            <p>
-              {inputValue2 === '' || inputValue2 <= 0
-                ? roundGBP
-                : Math.round(roundGBP * inputValue2 * 1000) / 1000}
-              {' '}
-              USD
-            </p>
           </BuyButton>
 
         </div>

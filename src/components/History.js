@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect } from 'react';
-import styles from '../../styles/components/History.module.css';
-import { useTransaction } from '../context/transactionContext';
+import styles from '../../styles/components/history.module.css';
+import { useTransaction } from '../context/transactioncontext';
 import instance from '../axios/axios';
 
 function History({ past }) {

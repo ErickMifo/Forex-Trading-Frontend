@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import styles from '../../styles/components/Queue.module.css';
-import { useTransaction } from '../context/transactionContext';
+import styles from '../../styles/components/queue.module.css';
+import { useTransaction } from '../context/transactioncontext';
 
 function Queue({ processing }) {
   const { QueueArray } = useTransaction();

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../styles/components/WalletButton.module.css';
+import styles from '../../../styles/components/walletbutton.module.css';
 
 // eslint-disable-next-line react/prop-types
 function WalltetButton({ onClick, children, disabled }) {
