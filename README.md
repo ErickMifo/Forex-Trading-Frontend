@@ -2,6 +2,8 @@
 
 ## Desription
 
+Project made for WestPoint's "Module 2".
+
 A frontend for a Forex Trading Application with support for i18n pt-br and en-us made with Nextjs where the user have a wallet to do mock trades and check his history. 
 Couple of dependencies were used such as:
 
@@ -59,8 +61,6 @@ A folder on the project called "context" is used to manage the state of the appl
 
 To make the Queue system I created an empty array and map it. Everytime the buy button is clicked, it it pushes a value inside the array, then the map function displays the "processing screen" and after a couple of seconds I remove the value.
 
-
-Project made for WestPoint's "Module 2".
+## Credits 
 
 Made by Erick Mifo ( https://github.com/ErickMifo ).
-
