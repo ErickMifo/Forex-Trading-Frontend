@@ -9,6 +9,13 @@ export const enUS = {
   confirm: 'Confirm',
   done: 'Transaction done',
   processing: 'Processing transaction',
+  formTitle: 'Login or sign up',
+  enter: 'Login',
+  create: 'Create an account',
+  password: 'Password',
+  confirmPassword: 'Confirm password',
+  alreadyHave: 'Already have an account',
+  signup: 'Sign up',
 };
 export const ptBR = {
   past: 'Histórico',
@@ -21,4 +28,11 @@ export const ptBR = {
   confirm: 'Confirmar',
   done: 'Transação efetuada',
   processing: 'Processando transação',
+  formTitle: 'Entre ou cadastre-se',
+  enter: 'Entrar',
+  create: 'Criar uma conta',
+  password: 'Senha',
+  confirmPassword: 'Confirmar senha',
+  alreadyHave: 'Já possuo uma conta',
+  signup: 'Cadastre-se',
 };

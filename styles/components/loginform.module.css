@@ -1,0 +1,67 @@
+.loginformContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  width: 30vw;
+  height: 45vh;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.loginformContainer input:first-child {
+  margin-top: 1rem;
+}
+
+.loginformContainer input:nth-child(2) {
+  margin-bottom: 1rem;
+}
+
+.loginformContainer input {
+  outline: none;
+  align-self: center;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 2px solid var(--background);
+  margin-top: 0.75rem;
+  width: 80%;
+}
+
+.loginformContainer button {
+  margin-top: 0.5rem;
+  width: 80%;
+  border-radius: 8px;
+  padding: 0.75rem;
+  background-color: #3b5998;
+  color: white;
+  font-size: 1rem;
+}
+
+.loginformContainer button:hover {
+  background-color: #305096;
+}
+
+.loginformContainer button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.newAccount {
+  margin-top: 1rem;
+  width: 80%;
+  border-top: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.newAccount button {
+  margin-top: 1rem;
+  background-color: rgb(55, 172, 55);
+}
+
+.newAccount button:hover {
+  background-color: rgb(22, 160, 22);
+}
