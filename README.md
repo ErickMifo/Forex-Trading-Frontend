@@ -1,6 +1,6 @@
 # Module-1-WestPoint-Frontend
 
-## Desription
+## Description
 
 Project made for WestPoint's "Module 2".
 
@@ -55,11 +55,11 @@ Most of the function have a self-explanatory name, but i'll quickly go through s
 
 Every useEffect is used to either fetch, update or post data. 
 To fetch data its used a function called "getData" and it uses axios to fetch from my database. In some cases socket is used to get it in real time instead.
-To post or update data its just used a "instance.post" or "instance.put" and passed where and what to post/update.
+To post or update data its just used an "instance.post" or "instance.put" and passed where and what to post/update.
 
 A folder on the project called "context" is used to manage the state of the application. Since the application is built through components this "useContext" hook is needed to make them interact with each other.
 
-To make the Queue system I created an empty array and map it. Everytime the buy button is clicked, it it pushes a value inside the array, then the map function displays the "processing screen" and after a couple of seconds I remove the value.
+To make the Queue system I created an empty array and map it. Everytime the buy button is clicked, it pushes a value inside the array, then the map function displays the "processing screen" and after a couple of seconds I remove the value.
 
 ## Credits 
 
