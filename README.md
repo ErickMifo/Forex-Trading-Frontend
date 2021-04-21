@@ -12,7 +12,7 @@ Couple of dependencies were used such as:
 3. Socket-io-client to update data in real time;
 4. uuid to create unique ids for each transaction.
 
-## Instalation 
+## Installation 
 
 
 To install this project, you can just git clone and yarn.
