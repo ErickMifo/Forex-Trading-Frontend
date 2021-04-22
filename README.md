@@ -37,7 +37,11 @@ Link to the backend - https://github.com/ErickMifo/module-2-WestPoint-backend.
 
 ## Layout
 
-The project contains 2 main components. 
+The project contains 3 main components. 
+
+**The landing page**
+
+![landing (2)](https://user-images.githubusercontent.com/65738815/115736158-72e99d00-a361-11eb-8689-c4d1ca8c4d96.png)
 
 **A Table of past trades and a dashboard to perform mock trades.**
 
