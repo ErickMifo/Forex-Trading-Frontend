@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import {
-  Legend,
   Line, LineChart, Tooltip, XAxis, YAxis,
 } from 'recharts';
 import io from 'socket.io-client';
@@ -97,7 +96,6 @@ function Graph() {
     <LineChart width={500} height={230} data={data}>
       <XAxis dataKey="date" />
       <YAxis type="number" domain={[0.7, 1.3]} />
-      <Legend />
       <Tooltip />
       <Line isAnimationActive={false} dataKey="USD" />
       <Line isAnimationActive={false} dataKey="GBP" stroke="#f70000" />

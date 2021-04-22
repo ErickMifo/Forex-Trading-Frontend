@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import { v4 as uuid } from 'uuid';
+import { useSession } from 'next-auth/client';
 import styles from '../../styles/components/dashboard.module.css';
 import instance from '../axios/axios';
 import { useTransaction } from '../context/transactioncontext';
@@ -10,12 +12,13 @@ import Input from './input';
 import Graph from './graph';
 import BuyButton from './buttons/buybutton';
 import WalltetButton from './buttons/walletbutton';
+import LogOutButton from './buttons/logoutbutton';
 import Wallet from './wallet';
 
 let socket;
 
 function DashBoard({
-  wallet, toBuy, toDeposit, select, confirm, buy,
+  wallet, toBuy, toDeposit, select, confirm, buy, logout, from,
 }) {
   const {
     history,
@@ -27,6 +30,11 @@ function DashBoard({
     QueueArray,
     setQueueArray,
   } = useTransaction();
+
+  const [session] = useSession();
+
+  const nameReplace = session.user.email.replace(/@.*$/, '');
+  const name = nameReplace !== session.user.email ? nameReplace : null;
 
   const [isWalletOpen, setIsWalletOpen] = useState(false);
   const onOpen = () => {
@@ -45,7 +53,7 @@ function DashBoard({
 
   // getting data from my own api.
   useEffect(() => {
-    async function getData() {
+    async function getCurrencyData() {
       const request = await instance.get('currency');
       if (request.data[0].currency_id === 1) {
         setUSD(request.data[0].usd);
@@ -57,12 +65,29 @@ function DashBoard({
       } else {
         setUSD(request.data[1].usd);
       }
-      const walletRequest = await instance.get('wallet');
-      setWalletUSD(walletRequest.data[0].usd);
-      setWalletGBP(walletRequest.data[0].gbp);
     }
 
-    getData();
+    getCurrencyData();
+  }, []);
+
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    async function getWalletData() {
+      const walletRequest = await instance.get('wallet');
+      walletRequest.data.forEach((item) => {
+        item.wallet_id === session.user.email
+        && setWalletGBP(item.gbp); setWalletUSD(item.usd);
+      });
+      walletRequest.data.forEach((item) => {
+        item.wallet_id !== session.user.email
+        && setCount(count + 1);
+        if (count > walletRequest.data.length) {
+          instance.post('wallet', { wallet_id: session.user.email, usd: 1000, gbp: 1000 });
+        }
+      });
+    }
+
+    getWalletData();
   }, []);
 
   const roundUSD = Math.round(USD * 1000) / 1000;
@@ -85,10 +110,14 @@ function DashBoard({
     instance.put('currency/1', { usd: roundUSD });
   }
 
-  // Update USD and GBP wallet values on mongodb when they change.
+  // Update USD and GBP wallet values on postgresql when they change.
+  const [changes, setChanges] = useState(0);
   useEffect(() => {
-    if (walletGBP && walletUSD !== 0) {
-      instance.put('wallet/1', { gbp: walletGBP, usd: walletUSD });
+    if (changes < 6) {
+      setChanges(changes + 1);
+      console.log(changes);
+    } else {
+      instance.put(`wallet/${session.user.email}`, { gbp: walletGBP, usd: walletUSD });
     }
   }, [walletUSD, walletGBP]);
 
@@ -115,6 +144,7 @@ function DashBoard({
       setWalletUSD(parseFloat(walletUSDref.current) + parseFloat(inputValue1));
       setHistory([`${Math.round(roundUSD * inputValue1 * 1000) / 1000} GBP → ${inputValue1} USD`, ...historyref.current]);
       instance.post('history', {
+        history_email: `${session.user.email}`,
         history_content: `${Math.round(roundUSD * inputValue1 * 1000) / 1000} GBP → ${inputValue1} USD`,
       });
       setQueueArray(Queueref.current.filter((item) => item.id !== id));
@@ -125,16 +155,14 @@ function DashBoard({
     setQueueArray([...QueueArray, { value: 1, id }]);
 
     setTimeout(() => {
-      setQueueArray(Queueref.current.filter((item) => item.id !== id));
-    }, time);
-
-    setTimeout(() => {
       setWalletUSD(parseFloat(walletUSDref.current) - Math.round(roundGBP * inputValue2 * 1000) / 1000);
       setWalletGBP(parseFloat(walletGBPref.current) + parseFloat(inputValue2));
       setHistory([`${Math.round(roundGBP * inputValue2 * 1000) / 1000} USD → ${inputValue2} GBP`, ...historyref.current]);
       instance.post('history', {
+        history_email: `${session.user.email}`,
         history_content: `${Math.round(roundGBP * inputValue2 * 1000) / 1000} USD → ${inputValue2} GBP`,
       });
+      setQueueArray(Queueref.current.filter((item) => item.id !== id));
     }, time);
   };
 
@@ -142,12 +170,20 @@ function DashBoard({
     <div className={styles.dashBoardContainer}>
 
       <div className={styles.graphContainer}>
-
-        <WalltetButton onClick={onOpen}>
-          {' '}
-          {wallet}
-          {' '}
-        </WalltetButton>
+        <div className={styles.buttonContainer}>
+          <WalltetButton onClick={onOpen}>
+            {' '}
+            {wallet}
+            {' '}
+          </WalltetButton>
+          <LogOutButton>
+            {logout}
+            {' '}
+            {from}
+            {' '}
+            {name}
+          </LogOutButton>
+        </div>
         <h3>
           Base EUR
         </h3>
