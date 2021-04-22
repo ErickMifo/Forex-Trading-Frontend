@@ -10,7 +10,8 @@ Couple of dependencies were used such as:
 1. Axios to fetch data from my api;
 2. Recharts to create a graph to show the variations of the currencies;
 3. Socket-io-client to update data in real time;
-4. uuid to create unique ids for each transaction.
+4. uuid to create unique ids for each transaction;
+5. nexth-auth to handle user authentication.
 
 ## Installation 
 
