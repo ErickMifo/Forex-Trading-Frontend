@@ -1,4 +1,4 @@
-# Module-1-WestPoint-Frontend
+# Module-2-WestPoint-Frontend
 
 ## Description
 
