@@ -70,25 +70,31 @@ function DashBoard({
     getCurrencyData();
   }, []);
 
-  const [count, setCount] = useState(0);
+  let count = 0;
   useEffect(() => {
     async function getWalletData() {
       const walletRequest = await instance.get('wallet');
       walletRequest.data.forEach((item) => {
         item.wallet_id === session.user.email
-        && setWalletGBP(item.gbp); setWalletUSD(item.usd);
+        && setWalletUSD(item.usd);
       });
       walletRequest.data.forEach((item) => {
+        item.wallet_id === session.user.email
+        && setWalletGBP(item.gbp);
+      });
+
+      walletRequest.data.forEach((item) => {
         item.wallet_id !== session.user.email
-        && setCount(count + 1);
-        if (count > walletRequest.data.length) {
+        // eslint-disable-next-line no-plusplus
+        && count++;
+        if (count === walletRequest.data.length) {
           instance.post('wallet', { wallet_id: session.user.email, usd: 1000, gbp: 1000 });
         }
       });
     }
 
     getWalletData();
-  }, []);
+  }, [session.user.email]);
 
   const roundUSD = Math.round(USD * 1000) / 1000;
   const roundGBP = Math.round(GBP * 1000) / 1000;
@@ -113,9 +119,8 @@ function DashBoard({
   // Update USD and GBP wallet values on postgresql when they change.
   const [changes, setChanges] = useState(0);
   useEffect(() => {
-    if (changes < 6) {
+    if (changes < 5) {
       setChanges(changes + 1);
-      console.log(changes);
     } else {
       instance.put(`wallet/${session.user.email}`, { gbp: walletGBP, usd: walletUSD });
     }
