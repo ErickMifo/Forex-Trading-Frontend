@@ -1,4 +1,4 @@
-# Module-2-WestPoint-Frontend
+# Forex-Trading-Frontend
 
 ## Description
 
@@ -25,7 +25,7 @@ To install this project, you can:
 
 And to make it fully work you will also need the backend part.
 
-Link to the backend - https://github.com/ErickMifo/module-2-WestPoint-backend.
+Link to the backend - https://github.com/ErickMifo/Forex-Trading-Backend.
 
 
 ## Project Structure
